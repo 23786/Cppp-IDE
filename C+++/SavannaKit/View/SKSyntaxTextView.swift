@@ -60,6 +60,8 @@ class SKSyntaxTextView: View {
     var lineNumberView: CDCodeEditorLineNumberView?
     
     var isUsingLSP: Bool = true
+    
+    var lastEditTime: Date?
 	
 	public var contentTextView: TextView {
 		return textView

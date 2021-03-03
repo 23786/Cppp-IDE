@@ -165,8 +165,8 @@ class CDMainWindowController: NSWindowController, NSWindowDelegate {
                 
             }
             
-            print(maxLine, column)
-            print((lineIndices[maxLine] ?? 10000000) + column)
+            // print(maxLine, column)
+            // print((lineIndices[maxLine] ?? 10000000) + column)
             if (lineIndices[maxLine] ?? 10000000) + column > editor.text.count {
                 return
             }

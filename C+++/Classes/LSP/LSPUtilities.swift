@@ -35,6 +35,10 @@ func CDLSPProcessDataFromServer(from data: Data) throws -> CDLSPBase {
         throw CDLSPError(description: "Error found when decoding data.")
     }
     
+    if str.isEmpty {
+        throw CDLSPError(description: "Empty String.")
+    }
+    
     var id: Int = -1
     var method: String = ""
     

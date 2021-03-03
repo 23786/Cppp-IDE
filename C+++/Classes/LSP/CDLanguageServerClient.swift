@@ -6,7 +6,6 @@
 //  Copyright © 2021 Zhu Yixuan. All rights reserved.
 //
 
-import SwiftLSPClient
 import Cocoa
 
 // TODO
@@ -17,7 +16,6 @@ extension Notification.Name {
 
 class CDLanguageServerClient: NSObject {
     
-    private var server: LanguageServer?
     private var process: Process?
     private let inputPipe = Pipe()
     private let outputPipe = Pipe()
@@ -28,37 +26,42 @@ class CDLanguageServerClient: NSObject {
     
     func startServer(path: String = "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clangd", arguments: [String] = [ ]) {
         
-        let process = Process()
-        process.launchPath = path
-        process.arguments = arguments
-        
-        process.standardInput = inputPipe
-        process.standardOutput = outputPipe
-        process.standardError = errorPipe
-        
-        outputPipe.fileHandleForReading.readabilityHandler = { (fileHandle) in
+        DispatchQueue(label: "LanguageServer", qos: .utility).sync {
             
-            self.readResponse(fileHandle.availableData)
+            let process = Process()
+            process.launchPath = path
+            process.arguments = arguments
+            
+            process.standardInput = self.inputPipe
+            process.standardOutput = self.outputPipe
+            process.standardError = self.errorPipe
+            
+            self.outputPipe.fileHandleForReading.readabilityHandler = { (fileHandle) in
+                
+                // print(String(data: fileHandle.availableData, encoding: .utf8))
+                self.readResponse(fileHandle.availableData)
+                
+            }
+            
+            // self.errorPipe.fileHandleForReading.readabilityHandler = { (fileHandle) in
+                
+                // NSLog("stderr: \(String(data: fileHandle.availableData, encoding: .utf8) ?? "ERROR")")
+                
+            // }
+            
+            process.launch()
+            
+            self.id = 1
+            
+            let request = CDLSPRequest(
+                method: "initialize",
+                id: self.id,
+                params: [ : ]
+            )
+            
+            self.writeRequest(request)
             
         }
-        
-        errorPipe.fileHandleForReading.readabilityHandler = { (fileHandle) in
-            
-            // NSLog("stderr: \(String(data: fileHandle.availableData, encoding: .utf8) ?? "ERROR")")
-            
-        }
-        
-        process.launch()
-        
-        id = 1
-        
-        let request = CDLSPRequest(
-            method: "initialize",
-            id: id,
-            params: [ : ]
-        )
-        
-        self.writeRequest(request)
         
     }
     

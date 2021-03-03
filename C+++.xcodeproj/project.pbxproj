@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -138,7 +138,6 @@
 		18FC05482487B9F600F33CE2 /* CDTestPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FC05472487B9F600F33CE2 /* CDTestPointView.swift */; };
 		18FC054B2487BA3600F33CE2 /* CDTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FC05492487BA3600F33CE2 /* CDTestViewController.swift */; };
 		18FC054C2487BA3600F33CE2 /* CDTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FC054A2487BA3600F33CE2 /* CDTestViewController.xib */; };
-		437AC7C225DD00160067EC01 /* SwiftLSPClient in Frameworks */ = {isa = PBXBuildFile; productRef = 437AC7C125DD00160067EC01 /* SwiftLSPClient */; };
 		437AC7CD25DD02CE0067EC01 /* SwiftTermMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437AC7CB25DD02CE0067EC01 /* SwiftTermMac.framework */; };
 		437AC7CF25DD02E20067EC01 /* SwiftTermMac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 437AC7CB25DD02CE0067EC01 /* SwiftTermMac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		437AC7D525DD1ED30067EC01 /* PerfectHTTPServer in Frameworks */ = {isa = PBXBuildFile; productRef = 437AC7D425DD1ED30067EC01 /* PerfectHTTPServer */; };
@@ -333,47 +332,6 @@
 		18FC05472487B9F600F33CE2 /* CDTestPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDTestPointView.swift; sourceTree = "<group>"; };
 		18FC05492487BA3600F33CE2 /* CDTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDTestViewController.swift; sourceTree = "<group>"; };
 		18FC054A2487BA3600F33CE2 /* CDTestViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CDTestViewController.xib; sourceTree = "<group>"; };
-		437AC78825DCFDE30067EC01 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		437AC78A25DCFDE30067EC01 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		437AC78E25DCFDE30067EC01 /* Index.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Index.h; sourceTree = "<group>"; };
-		437AC78F25DCFDE30067EC01 /* BuildSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BuildSystem.h; sourceTree = "<group>"; };
-		437AC79025DCFDE30067EC01 /* Documentation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Documentation.h; sourceTree = "<group>"; };
-		437AC79125DCFDE30067EC01 /* CXCompilationDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CXCompilationDatabase.h; sourceTree = "<group>"; };
-		437AC79225DCFDE30067EC01 /* CXErrorCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CXErrorCode.h; sourceTree = "<group>"; };
-		437AC79325DCFDE30067EC01 /* CXString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CXString.h; sourceTree = "<group>"; };
-		437AC79425DCFDE30067EC01 /* Platform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
-		437AC79625DCFDE30067EC01 /* libclangFrontend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangFrontend.a; sourceTree = "<group>"; };
-		437AC79725DCFDE30067EC01 /* libLLVMSupport.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLLVMSupport.a; sourceTree = "<group>"; };
-		437AC79825DCFDE30067EC01 /* libclangFormat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangFormat.a; sourceTree = "<group>"; };
-		437AC79925DCFDE30067EC01 /* libclangDynamicASTMatchers.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangDynamicASTMatchers.a; sourceTree = "<group>"; };
-		437AC79A25DCFDE30067EC01 /* libclangCodeGen.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangCodeGen.a; sourceTree = "<group>"; };
-		437AC79B25DCFDE30067EC01 /* libclangSerialization.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangSerialization.a; sourceTree = "<group>"; };
-		437AC79C25DCFDE30067EC01 /* libLLVMCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLLVMCore.a; sourceTree = "<group>"; };
-		437AC79D25DCFDE30067EC01 /* libLLVMMC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLLVMMC.a; sourceTree = "<group>"; };
-		437AC79E25DCFDE30067EC01 /* libclangRewrite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangRewrite.a; sourceTree = "<group>"; };
-		437AC79F25DCFDE30067EC01 /* libclangAST.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangAST.a; sourceTree = "<group>"; };
-		437AC7A025DCFDE30067EC01 /* libclangEdit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangEdit.a; sourceTree = "<group>"; };
-		437AC7A125DCFDE30067EC01 /* libclangRewriteFrontend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangRewriteFrontend.a; sourceTree = "<group>"; };
-		437AC7A225DCFDE30067EC01 /* libclangLex.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangLex.a; sourceTree = "<group>"; };
-		437AC7A325DCFDE30067EC01 /* libLLVMBitReader.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLLVMBitReader.a; sourceTree = "<group>"; };
-		437AC7A425DCFDE30067EC01 /* libclangBasic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangBasic.a; sourceTree = "<group>"; };
-		437AC7A525DCFDE30067EC01 /* libclang.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclang.a; sourceTree = "<group>"; };
-		437AC7A625DCFDE30067EC01 /* libLLVMOption.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLLVMOption.a; sourceTree = "<group>"; };
-		437AC7A725DCFDE30067EC01 /* libclangAnalysis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangAnalysis.a; sourceTree = "<group>"; };
-		437AC7A825DCFDE30067EC01 /* libclangStaticAnalyzerCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangStaticAnalyzerCore.a; sourceTree = "<group>"; };
-		437AC7A925DCFDE30067EC01 /* libclangASTMatchers.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangASTMatchers.a; sourceTree = "<group>"; };
-		437AC7AA25DCFDE30067EC01 /* libclangDriver.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangDriver.a; sourceTree = "<group>"; };
-		437AC7AB25DCFDE30067EC01 /* libclangParse.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangParse.a; sourceTree = "<group>"; };
-		437AC7AC25DCFDE30067EC01 /* libclangStaticAnalyzerCheckers.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangStaticAnalyzerCheckers.a; sourceTree = "<group>"; };
-		437AC7AD25DCFDE30067EC01 /* libclangTooling.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangTooling.a; sourceTree = "<group>"; };
-		437AC7AE25DCFDE30067EC01 /* libLLVMMCParser.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLLVMMCParser.a; sourceTree = "<group>"; };
-		437AC7AF25DCFDE30067EC01 /* libclangToolingCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangToolingCore.a; sourceTree = "<group>"; };
-		437AC7B025DCFDE30067EC01 /* libclangFrontendTool.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangFrontendTool.a; sourceTree = "<group>"; };
-		437AC7B125DCFDE30067EC01 /* libclangARCMigrate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangARCMigrate.a; sourceTree = "<group>"; };
-		437AC7B225DCFDE30067EC01 /* libclangStaticAnalyzerFrontend.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangStaticAnalyzerFrontend.a; sourceTree = "<group>"; };
-		437AC7B325DCFDE30067EC01 /* libclangIndex.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangIndex.a; sourceTree = "<group>"; };
-		437AC7B425DCFDE30067EC01 /* libclangSema.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libclangSema.a; sourceTree = "<group>"; };
-		437AC7B625DCFDE30067EC01 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		437AC7CA25DD02CE0067EC01 /* SwiftLSPClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftLSPClient.framework; sourceTree = "<group>"; };
 		437AC7CB25DD02CE0067EC01 /* SwiftTermMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftTermMac.framework; sourceTree = "<group>"; };
 		437AC7D825DD23B40067EC01 /* CDServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDServer.swift; sourceTree = "<group>"; };
@@ -720,7 +678,6 @@
 			isa = PBXGroup;
 			children = (
 				180480A824474A0700CD0A4D /* README.md */,
-				437AC78725DCFDE30067EC01 /* LLVM */,
 				18B3C77E24282C1F00F4CA14 /* C+++ */,
 				18CB5C7C25CE3ED900FC2E9D /* C+++Tests */,
 				18B3C76524272D9F00F4CA14 /* Products */,
@@ -817,102 +774,6 @@
 				18FC054A2487BA3600F33CE2 /* CDTestViewController.xib */,
 			);
 			path = Test;
-			sourceTree = "<group>";
-		};
-		437AC78725DCFDE30067EC01 /* LLVM */ = {
-			isa = PBXGroup;
-			children = (
-				437AC78825DCFDE30067EC01 /* Makefile */,
-				437AC78925DCFDE30067EC01 /* Source */,
-				437AC78B25DCFDE30067EC01 /* Release */,
-				437AC7B525DCFDE30067EC01 /* Build */,
-			);
-			path = LLVM;
-			sourceTree = "<group>";
-		};
-		437AC78925DCFDE30067EC01 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				437AC78A25DCFDE30067EC01 /* .gitignore */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
-		437AC78B25DCFDE30067EC01 /* Release */ = {
-			isa = PBXGroup;
-			children = (
-				437AC78C25DCFDE30067EC01 /* include */,
-				437AC79525DCFDE30067EC01 /* lib */,
-			);
-			path = Release;
-			sourceTree = "<group>";
-		};
-		437AC78C25DCFDE30067EC01 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				437AC78D25DCFDE30067EC01 /* clang-c */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		437AC78D25DCFDE30067EC01 /* clang-c */ = {
-			isa = PBXGroup;
-			children = (
-				437AC78E25DCFDE30067EC01 /* Index.h */,
-				437AC78F25DCFDE30067EC01 /* BuildSystem.h */,
-				437AC79025DCFDE30067EC01 /* Documentation.h */,
-				437AC79125DCFDE30067EC01 /* CXCompilationDatabase.h */,
-				437AC79225DCFDE30067EC01 /* CXErrorCode.h */,
-				437AC79325DCFDE30067EC01 /* CXString.h */,
-				437AC79425DCFDE30067EC01 /* Platform.h */,
-			);
-			path = "clang-c";
-			sourceTree = "<group>";
-		};
-		437AC79525DCFDE30067EC01 /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				437AC79625DCFDE30067EC01 /* libclangFrontend.a */,
-				437AC79725DCFDE30067EC01 /* libLLVMSupport.a */,
-				437AC79825DCFDE30067EC01 /* libclangFormat.a */,
-				437AC79925DCFDE30067EC01 /* libclangDynamicASTMatchers.a */,
-				437AC79A25DCFDE30067EC01 /* libclangCodeGen.a */,
-				437AC79B25DCFDE30067EC01 /* libclangSerialization.a */,
-				437AC79C25DCFDE30067EC01 /* libLLVMCore.a */,
-				437AC79D25DCFDE30067EC01 /* libLLVMMC.a */,
-				437AC79E25DCFDE30067EC01 /* libclangRewrite.a */,
-				437AC79F25DCFDE30067EC01 /* libclangAST.a */,
-				437AC7A025DCFDE30067EC01 /* libclangEdit.a */,
-				437AC7A125DCFDE30067EC01 /* libclangRewriteFrontend.a */,
-				437AC7A225DCFDE30067EC01 /* libclangLex.a */,
-				437AC7A325DCFDE30067EC01 /* libLLVMBitReader.a */,
-				437AC7A425DCFDE30067EC01 /* libclangBasic.a */,
-				437AC7A525DCFDE30067EC01 /* libclang.a */,
-				437AC7A625DCFDE30067EC01 /* libLLVMOption.a */,
-				437AC7A725DCFDE30067EC01 /* libclangAnalysis.a */,
-				437AC7A825DCFDE30067EC01 /* libclangStaticAnalyzerCore.a */,
-				437AC7A925DCFDE30067EC01 /* libclangASTMatchers.a */,
-				437AC7AA25DCFDE30067EC01 /* libclangDriver.a */,
-				437AC7AB25DCFDE30067EC01 /* libclangParse.a */,
-				437AC7AC25DCFDE30067EC01 /* libclangStaticAnalyzerCheckers.a */,
-				437AC7AD25DCFDE30067EC01 /* libclangTooling.a */,
-				437AC7AE25DCFDE30067EC01 /* libLLVMMCParser.a */,
-				437AC7AF25DCFDE30067EC01 /* libclangToolingCore.a */,
-				437AC7B025DCFDE30067EC01 /* libclangFrontendTool.a */,
-				437AC7B125DCFDE30067EC01 /* libclangARCMigrate.a */,
-				437AC7B225DCFDE30067EC01 /* libclangStaticAnalyzerFrontend.a */,
-				437AC7B325DCFDE30067EC01 /* libclangIndex.a */,
-				437AC7B425DCFDE30067EC01 /* libclangSema.a */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
-		437AC7B525DCFDE30067EC01 /* Build */ = {
-			isa = PBXGroup;
-			children = (
-				437AC7B625DCFDE30067EC01 /* .gitignore */,
-			);
-			path = Build;
 			sourceTree = "<group>";
 		};
 		437AC7D725DD205A0067EC01 /* Server */ = {
@@ -1309,7 +1170,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 3.0;
-				DEVELOPMENT_TEAM = S3NC28MP36;
+				DEVELOPMENT_TEAM = XG7269D873;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1346,7 +1207,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 3.0;
-				DEVELOPMENT_TEAM = S3NC28MP36;
+				DEVELOPMENT_TEAM = XG7269D873;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -29,7 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, CDLanguageServerClientDelega
         
         GlobalMainWindowController = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "Document Window Controller") as? CDMainWindowController
         
-        CDServer.shared.start()
+        // CDServer.shared.start()
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {

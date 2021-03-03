@@ -159,6 +159,29 @@ extension SKSyntaxTextView: NSTextViewDelegate {
     
     func didUpdateText() {
         
+        let date = Date()
+        self.lastEditTime = date
+        
+        DispatchQueue(label: "Timer").asyncAfter(deadline: DispatchTime.now() + 1.5) {
+            
+            DispatchQueue.main.async {
+                
+                if self.lastEditTime == date {
+                    
+                    guard !self.isChangingDocument, let url = self.textView.document?.fileURL?.path else {
+                        return
+                    }
+                    
+                    if self.isUsingLSP {
+                        GlobalLSPClient?.didChangeText(path: url, newText: self.text)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
         self.invalidateCachedTokens()
         self.textView.invalidateCachedParagraphs()
         
@@ -174,14 +197,6 @@ extension SKSyntaxTextView: NSTextViewDelegate {
         
         DispatchQueue.main.async {
             self.lineNumberView?.draw()
-        }
-        
-        guard !isChangingDocument, let url = self.textView.document?.fileURL?.path else {
-            return
-        }
-        
-        if isUsingLSP {
-            GlobalLSPClient?.didChangeText(path: url, newText: self.text)
         }
         
     }
