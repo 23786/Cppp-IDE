@@ -185,14 +185,13 @@ class CDMainWindowController: NSWindowController, NSWindowDelegate {
                     let nsRange = NSRange(location: start, length: end - start + 1)
                     
                     switch diagnostic.severity {
-                        case .error,.none:
+                        case .error, .none:
                             errorRangeArray.append(nsRange)
                         case .hint, .information:
                             noteRangeArray.append(nsRange)
                         case .warning:
                             warningRangeArray.append(nsRange)
                     }
-                    
                     
                     editor.textStorage?.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: nsRange)
                     editor.textStorage?.addAttribute(.underlineColor, value: NSColor.red, range: nsRange)

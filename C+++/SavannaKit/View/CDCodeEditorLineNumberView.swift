@@ -53,6 +53,8 @@ class CDCodeEditorLineNumberView: CDFlippedView {
         
     }
     
+    private var lastSavedLineRects: [NSRect] = []
+    
     override var frame: NSRect {
         didSet {
             DispatchQueue.main.async {
@@ -65,6 +67,13 @@ class CDCodeEditorLineNumberView: CDFlippedView {
     
     func draw() {
         
+        let currentLineRects = textViewLineRects
+        if currentLineRects == lastSavedLineRects {
+            return
+        }
+        
+        lastSavedLineRects = currentLineRects
+        
         var lineNumber = 0
         for view in self.subviews {
             view.removeFromSuperview()
@@ -73,8 +82,7 @@ class CDCodeEditorLineNumberView: CDFlippedView {
         self.buttonsArray = []
         // self.codeFoldingButtons = []
         
-        let rects = self.textViewLineRects
-        for item in rects {
+        for item in currentLineRects {
             
             let button = CDCodeEditorLineNumberViewButton(frame: NSMakeRect(2.0, item.origin.y, 34.0, item.height))
             button.isBordered = false
@@ -110,8 +118,10 @@ class CDCodeEditorLineNumberView: CDFlippedView {
         }
         
         self.shouldReloadAfterChangingFrame = false
-        self.frame.size.height = (rects.last?.origin.y ?? 0) + (rects.last?.height ?? 0)
-        self.superview?.frame.size.height = (rects.last?.origin.y ?? 0) + (rects.last?.height ?? 0)
+        self.frame.size.height = (currentLineRects.last?.origin.y ?? 0)
+                                + (currentLineRects.last?.height ?? 0)
+        self.superview?.frame.size.height = (currentLineRects.last?.origin.y ?? 0)
+                                + (currentLineRects.last?.height ?? 0)
         self.shouldReloadAfterChangingFrame = true
         
     }
