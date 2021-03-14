@@ -12,6 +12,7 @@ import Cocoa
 extension Notification.Name {
     static let languageServerDidOpenDocument = NSNotification.Name(rawValue: "LanguageServerDidOpenDocument")
     static let languageServerDidInit = NSNotification.Name(rawValue: "LanguageServerDidInit")
+    static let languageServerDidQuit = NSNotification.Name(rawValue: "LanguageServerDidQuit")
 }
 
 class CDLanguageServerClient: NSObject {
@@ -21,6 +22,7 @@ class CDLanguageServerClient: NSObject {
     private let outputPipe = Pipe()
     private let errorPipe = Pipe()
     private var id: Int = 1
+    private var isProcessRunning = false
     private var documentVersions: [String : Int] = [ : ]
     var delegate: CDLanguageServerClientDelegate?
     
@@ -50,6 +52,12 @@ class CDLanguageServerClient: NSObject {
             // }
             
             process.launch()
+            NotificationCenter.default.post(Notification(name: .languageServerDidInit))
+            isProcessRunning = true
+            process.terminationHandler = { (process) in
+                self.isProcessRunning = false
+                NotificationCenter.default.post(Notification(name: .languageServerDidQuit))
+            }
             
             self.id = 1
             
@@ -80,6 +88,7 @@ class CDLanguageServerClient: NSObject {
             ]
         )
         self.writeNotification(noti)
+        NotificationCenter.default.post(Notification(name: .languageServerDidOpenDocument))
         
     }
     
@@ -126,7 +135,9 @@ class CDLanguageServerClient: NSObject {
         guard data != nil else {
             return
         }
-        self.inputPipe.fileHandleForWriting.write(data!)
+        if isProcessRunning {
+            self.inputPipe.fileHandleForWriting.write(data!)
+        }
         
     }
     
@@ -137,7 +148,9 @@ class CDLanguageServerClient: NSObject {
         guard data != nil else {
             return
         }
-        self.inputPipe.fileHandleForWriting.write(data!)
+        if isProcessRunning {
+            self.inputPipe.fileHandleForWriting.write(data!)
+        }
         
     }
 

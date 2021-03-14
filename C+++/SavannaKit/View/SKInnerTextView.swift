@@ -54,15 +54,15 @@ class SKInnerTextView: TextView {
         }
         
         for line in self.errorLineRanges {
-            drawLineBackground(forRange: line, color: NSColor(red: 1, green: 239 / 255, blue: 237 / 255, alpha: 1))
+            drawLineBackground(forRange: line, color: NSColor(red: 1, green: 0, blue: 0, alpha: 0.1))
         }
         
         for line in self.warningLineRanges {
-            drawLineBackground(forRange: line, color: NSColor(red: 1, green: 248 / 255, blue: 200 / 255, alpha: 1))
+            drawLineBackground(forRange: line, color: NSColor(red: 1, green: 175 / 255, blue: 36 / 255, alpha: 0.1))
         }
         
         for line in self.noteLineRanges {
-            drawLineBackground(forRange: line, color: NSColor(red: 240 / 255, green: 240 / 255, blue: 240 / 255, alpha: 1))
+            drawLineBackground(forRange: line, color: NSColor(red: 1, green: 1, blue: 1, alpha: 0.2))
         }
         
     }

@@ -131,11 +131,25 @@ class CDMainWindowController: NSWindowController, NSWindowDelegate {
         
     }
     
+    func clearDiagnostics() {
+        
+        let editor = self.mainViewController.mainTextView.textView
+        
+        editor.errorLineRanges = []
+        editor.warningLineRanges = []
+        editor.noteLineRanges = []
+        
+    }
+    
     func displayDiagnosticsForCurrentFile(_ diagnostics: [CDDiagnostic]) {
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
             
             let editor = self.mainViewController.mainTextView.textView
+            
+            if diagnostics.isEmpty {
+                self.clearDiagnostics()
+            }
             
             var maxLine = -1, column = -1
             
