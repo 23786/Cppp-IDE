@@ -157,11 +157,10 @@ extension SKSyntaxTextView: NSTextViewDelegate {
         
     }
     
-    func didUpdateText() {
+    func waitForStopEditingAndPostLSPRequest() {
         
         let date = Date()
         self.lastEditTime = date
-        
         DispatchQueue(label: "Timer").asyncAfter(deadline: DispatchTime.now() + 1.5) {
             
             DispatchQueue.main.async {
@@ -181,6 +180,12 @@ extension SKSyntaxTextView: NSTextViewDelegate {
             }
             
         }
+        
+    }
+    
+    func didUpdateText() {
+        
+        waitForStopEditingAndPostLSPRequest()
         
         self.invalidateCachedTokens()
         self.textView.invalidateCachedParagraphs()
@@ -204,6 +209,7 @@ extension SKSyntaxTextView: NSTextViewDelegate {
     open func textViewDidChangeSelection(_ notification: Notification) {
         
         contentDidChangeSelection()
+        waitForStopEditingAndPostLSPRequest()
 
     }
     
@@ -338,9 +344,38 @@ extension SKSyntaxTextView {
 
 			return false
 		}
-		
+        
+        discardDiagnosticsForRange(range: selectedRange)
 		return true
+        
 	}
+    
+    func discardDiagnosticsForRange(range: NSRange) {
+        
+        let paraRange = self.text.nsString.paragraphRange(for: range)
+        
+        self.textView.errorLineRanges = self.textView.errorLineRanges.filter({ (range) in
+            if paraRange.intersection(range) != nil {
+                return false
+            }
+            return true
+        })
+        
+        self.textView.warningLineRanges = self.textView.warningLineRanges.filter({ (range) in
+            if paraRange.intersection(range) != nil {
+                return false
+            }
+            return true
+        })
+        
+        self.textView.noteLineRanges = self.textView.noteLineRanges.filter({ (range) in
+            if paraRange.intersection(range) != nil {
+                return false
+            }
+            return true
+        })
+        
+    }
 	
 	func contentDidChangeSelection() {
 		

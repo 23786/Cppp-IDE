@@ -39,6 +39,16 @@ class SKInnerTextView: TextView {
 		cachedParagraphs = nil
 	}
 	
+    var isDarkMode: Bool {
+        if #available(OSX 10.14, *) {
+            switch self.effectiveAppearance.name {
+                case .darkAqua, .vibrantDark, .accessibilityHighContrastDarkAqua, .accessibilityHighContrastVibrantDark: return true
+                default: return false
+            }
+        } else {
+            return false
+        }
+    }
     
     override func drawBackground(in rect: NSRect) {
         super.drawBackground(in: rect)
@@ -54,15 +64,23 @@ class SKInnerTextView: TextView {
         }
         
         for line in self.errorLineRanges {
-            drawLineBackground(forRange: line, color: NSColor(red: 1, green: 0, blue: 0, alpha: 0.1))
+            if isDarkMode {
+                drawLineBackground(forRange: line, color: NSColor(red: 52 / 255, green: 36 / 255, blue: 43 / 255, alpha: 1))
+            } else {
+                drawLineBackground(forRange: line, color: NSColor(red: 1, green: 239 / 255, blue: 237 / 255, alpha: 1))
+            }
         }
         
         for line in self.warningLineRanges {
-            drawLineBackground(forRange: line, color: NSColor(red: 1, green: 175 / 255, blue: 36 / 255, alpha: 0.1))
+            if isDarkMode {
+                drawLineBackground(forRange: line, color: NSColor(red: 52 / 255, green: 49 / 255, blue: 40 / 255, alpha: 1))
+            } else {
+                drawLineBackground(forRange: line, color: NSColor(red: 1, green: 248 / 255, blue: 200 / 255, alpha: 1))
+            }
         }
         
         for line in self.noteLineRanges {
-            drawLineBackground(forRange: line, color: NSColor(red: 1, green: 1, blue: 1, alpha: 0.2))
+            drawLineBackground(forRange: line, color: NSColor(red: 0, green: 0, blue: 0, alpha: 0.2))
         }
         
     }

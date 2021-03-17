@@ -64,14 +64,14 @@ So if you want to use C+++, the best choice is to **wait** until the version 3.0
 ## Update Log
 ### 2021.? Version 3.0.0 (212300) **(Developing)**
 - [x] Completely new user interface (*)
-- [ ] Use clangd as C++ language server (*)
+- [x] Use clangd as C++ language server (In progress)
 - [x] Astyle
 - [x] Support running a test case after compiling instead of running in terminal
 - [x] Code minimap
 - [ ] Better debugging (*)
 - [x] Search in C+++
 - [x] More settings
-- [ ] Speed up editing (*)
+- [x] Speed up editing (In progress)
 - [ ] Support viewing and submitting questions on Online Judges like Luogu and Codeforces
 
 
