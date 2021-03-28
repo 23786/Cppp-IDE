@@ -122,7 +122,7 @@ class SKSyntaxTextView: View {
     }
     
     private func createLineNumberView() -> CDCodeEditorLineNumberView {
-        return CDCodeEditorLineNumberView(frame: NSMakeRect(0, 0, 45, 0), textView: self.textView)
+        return CDCodeEditorLineNumberView(frame: NSMakeRect(0, 0, 55, 0), textView: self.textView)
     }
 
     let scrollView = CDScrollView()
@@ -152,7 +152,7 @@ class SKSyntaxTextView: View {
         
         scrollView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 45.0).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 55.0).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         
         wrapperView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
@@ -164,16 +164,16 @@ class SKSyntaxTextView: View {
         lineNumberScrollView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         lineNumberScrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         lineNumberScrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        lineNumberScrollView.widthAnchor.constraint(equalToConstant: 45.0).isActive = true
+        lineNumberScrollView.widthAnchor.constraint(equalToConstant: 55.0).isActive = true
         lineNumberScrollView.documentView = lineNumberView
         lineNumberScrollView.drawsBackground = true
         lineNumberScrollView.backgroundColor = .textBackgroundColor
-        let view = CDFlippedView(frame: NSMakeRect(0.0, 0.0, 45.0, 0.0))
+        let view = CDFlippedView(frame: NSMakeRect(0.0, 0.0, 55.0, 0.0))
         lineNumberScrollView.documentView = view
         view.addSubview(lineNumberView!)
         lineNumberView?.frame.origin = NSPoint.zero
         lineNumberView?.delegate = self
-        lineNumberView?.widthAnchor.constraint(equalToConstant: 45.0).isActive = true
+        lineNumberView?.widthAnchor.constraint(equalToConstant: 55.0).isActive = true
         lineNumberView?.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         lineNumberView?.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         lineNumberView?.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -213,6 +213,7 @@ class SKSyntaxTextView: View {
     
 		textView.innerDelegate = self
 		textView.delegate = self
+        textView.lineNumberView = lineNumberView
 		
 		textView.text = ""
 

@@ -38,6 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, CDLanguageServerClientDelega
         GlobalLSPClient = CDLanguageServerClient()
         GlobalLSPClient?.startServer()
         GlobalLSPClient?.delegate = self
+        signal(SIGPIPE, SIG_IGN)
         
         if CDSettings.checksUpdateAfterLaunching {
             NSApplication.shared.checkUpdate(alsoShowAlertWhenUpToDate: false)

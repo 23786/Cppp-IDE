@@ -354,6 +354,20 @@ extension SKSyntaxTextView {
         
         let paraRange = self.text.nsString.paragraphRange(for: range)
         
+        let lineNumberBegin = (self.textView.layoutManager as? SKSyntaxTextViewLayoutManager)?.lineNumber(at: range.lowerBound) ?? 0
+        let lineNumberEnd = (self.textView.layoutManager as? SKSyntaxTextViewLayoutManager)?.lineNumber(at: range.upperBound) ?? 0
+        
+        var flag = false
+        for i in lineNumberBegin...lineNumberEnd {
+            if self.lineNumberView?.buttonsArray.count ?? -1 > i && self.lineNumberView?.buttonsArray[i - 1].correspondingDiagnostics.count ?? -1 > 0 {
+                flag = true
+                self.lineNumberView?.buttonsArray[i - 1].correspondingDiagnostics = []
+            }
+        }
+        if flag {
+            self.lineNumberView?.draw()
+        }
+        
         self.textView.errorLineRanges = self.textView.errorLineRanges.filter({ (range) in
             if paraRange.intersection(range) != nil {
                 return false

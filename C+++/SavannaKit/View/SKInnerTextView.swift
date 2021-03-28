@@ -24,6 +24,19 @@ class SKInnerTextView: TextView {
 	
 	var cachedParagraphs: [SKParagraph]?
     
+    var lineNumberView: CDCodeEditorLineNumberView?
+    
+    var diagnostics = [CDDiagnostic]() {
+        didSet {
+            for diagnostic in self.diagnostics {
+                guard let line = diagnostic.range?.start.line else {
+                    continue
+                }
+                self.lineNumberView?.buttonsArray[line].correspondingDiagnostics.append(diagnostic)
+            }
+        }
+    }
+    
     // Code Completion
     var cachedCompletionResults = [CDCompletionResult]()
     var charRangeForCompletion: NSRange?

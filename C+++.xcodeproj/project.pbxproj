@@ -25,6 +25,7 @@
 		181B4F8B24DC392C000F3ED7 /* CDMinimapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B4F8A24DC392C000F3ED7 /* CDMinimapView.swift */; };
 		181B4F8D24DCED1E000F3ED7 /* CDMinimapScrollerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B4F8C24DCED1E000F3ED7 /* CDMinimapScrollerView.swift */; };
 		181B4F9024DE39F7000F3ED7 /* CDParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181B4F8F24DE39F7000F3ED7 /* CDParser.swift */; };
+		181CE0E7260F05BB00075B43 /* CDLineRangeCacheable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181CE0E6260F05BB00075B43 /* CDLineRangeCacheable.swift */; };
 		181F2B9724AB490300C4B217 /* C+++-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = 187EF969248C86DD0023F381 /* C+++-Bridging-Header.h */; };
 		181F2B9A24AB557D00C4B217 /* libclang.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 181F2B9924AB557D00C4B217 /* libclang.dylib */; };
 		181F2B9B24AB558500C4B217 /* libclang.dylib in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 181F2B9924AB557D00C4B217 /* libclang.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -140,7 +141,6 @@
 		18FC054C2487BA3600F33CE2 /* CDTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FC054A2487BA3600F33CE2 /* CDTestViewController.xib */; };
 		437AC7CD25DD02CE0067EC01 /* SwiftTermMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 437AC7CB25DD02CE0067EC01 /* SwiftTermMac.framework */; };
 		437AC7CF25DD02E20067EC01 /* SwiftTermMac.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 437AC7CB25DD02CE0067EC01 /* SwiftTermMac.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		437AC7D525DD1ED30067EC01 /* PerfectHTTPServer in Frameworks */ = {isa = PBXBuildFile; productRef = 437AC7D425DD1ED30067EC01 /* PerfectHTTPServer */; };
 		437AC7D925DD23B40067EC01 /* CDServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437AC7D825DD23B40067EC01 /* CDServer.swift */; };
 /* End PBXBuildFile section */
 
@@ -199,6 +199,7 @@
 		181B4F8A24DC392C000F3ED7 /* CDMinimapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDMinimapView.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		181B4F8C24DCED1E000F3ED7 /* CDMinimapScrollerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDMinimapScrollerView.swift; sourceTree = "<group>"; };
 		181B4F8F24DE39F7000F3ED7 /* CDParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDParser.swift; sourceTree = "<group>"; };
+		181CE0E6260F05BB00075B43 /* CDLineRangeCacheable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDLineRangeCacheable.swift; sourceTree = "<group>"; };
 		181F2B9924AB557D00C4B217 /* libclang.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libclang.dylib; sourceTree = "<group>"; };
 		181F2BAF24AC78B400C4B217 /* ClangKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClangKit.h; sourceTree = "<group>"; };
 		181F2BB024AC78B400C4B217 /* CKWarnings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKWarnings.h; sourceTree = "<group>"; };
@@ -343,8 +344,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				437AC7CD25DD02CE0067EC01 /* SwiftTermMac.framework in Frameworks */,
-				437AC7D525DD1ED30067EC01 /* PerfectHTTPServer in Frameworks */,
-				437AC7C225DD00160067EC01 /* SwiftLSPClient in Frameworks */,
 				181F2B9A24AB557D00C4B217 /* libclang.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -475,6 +474,7 @@
 				182B3D572524A83500515375 /* SKSyntaxTextView+TextViewDelegate.swift */,
 				1801DF5E24D2DDC2005CAD42 /* CDCodeEditorLineNumberView.swift */,
 				1801DF6024D3B64B005CAD42 /* CDCodeEditorLineNumberViewButton.swift */,
+				181CE0E6260F05BB00075B43 /* CDLineRangeCacheable.swift */,
 				182B3D582524A83500515375 /* SKInnerTextView.swift */,
 				182B3D592524A83500515375 /* SKTextViewWrapperView.swift */,
 				182B3D5B2524A83500515375 /* SKSyntaxTextViewLayoutManager.swift */,
@@ -803,8 +803,6 @@
 			);
 			name = "C+++";
 			packageProductDependencies = (
-				437AC7C125DD00160067EC01 /* SwiftLSPClient */,
-				437AC7D425DD1ED30067EC01 /* PerfectHTTPServer */,
 			);
 			productName = "Code Editor";
 			productReference = 18B3C77D24282C1F00F4CA14 /* C+++.app */;
@@ -859,8 +857,6 @@
 			);
 			mainGroup = 18B3C75B24272D9F00F4CA14;
 			packageReferences = (
-				437AC7C025DD00150067EC01 /* XCRemoteSwiftPackageReference "SwiftLSPClient" */,
-				437AC7D325DD1ED30067EC01 /* XCRemoteSwiftPackageReference "Perfect-HTTPServer" */,
 			);
 			productRefGroup = 18B3C76524272D9F00F4CA14 /* Products */;
 			projectDirPath = "";
@@ -1013,6 +1009,7 @@
 				1872603424AF4FE8004C69B2 /* CDDiagnosticsViewController.swift in Sources */,
 				184FE40524D5817D0093CC2B /* CDCodeDocument+Debug.swift in Sources */,
 				18FC05482487B9F600F33CE2 /* CDTestPointView.swift in Sources */,
+				181CE0E7260F05BB00075B43 /* CDLineRangeCacheable.swift in Sources */,
 				18B3C78024282C1F00F4CA14 /* AppDelegate.swift in Sources */,
 				181236AC2557D0BD0058004D /* CDEditorPreferencesViewController.swift in Sources */,
 				18B3C78424282C1F00F4CA14 /* CDCodeDocument.swift in Sources */,
@@ -1310,38 +1307,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		437AC7C025DD00150067EC01 /* XCRemoteSwiftPackageReference "SwiftLSPClient" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ChimeHQ/SwiftLSPClient";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.8.4;
-			};
-		};
-		437AC7D325DD1ED30067EC01 /* XCRemoteSwiftPackageReference "Perfect-HTTPServer" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/PerfectlySoft/Perfect-HTTPServer.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.23;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		437AC7C125DD00160067EC01 /* SwiftLSPClient */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 437AC7C025DD00150067EC01 /* XCRemoteSwiftPackageReference "SwiftLSPClient" */;
-			productName = SwiftLSPClient;
-		};
-		437AC7D425DD1ED30067EC01 /* PerfectHTTPServer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 437AC7D325DD1ED30067EC01 /* XCRemoteSwiftPackageReference "Perfect-HTTPServer" */;
-			productName = PerfectHTTPServer;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 18B3C75C24272D9F00F4CA14 /* Project object */;
 }

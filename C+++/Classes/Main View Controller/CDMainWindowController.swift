@@ -139,6 +139,10 @@ class CDMainWindowController: NSWindowController, NSWindowDelegate {
         editor.warningLineRanges = []
         editor.noteLineRanges = []
         
+        for button in editor.lineNumberView?.buttonsArray ?? [] {
+            button.correspondingDiagnostics = []
+        }
+        
     }
     
     func displayDiagnosticsForCurrentFile(_ diagnostics: [CDDiagnostic]) {
@@ -147,11 +151,15 @@ class CDMainWindowController: NSWindowController, NSWindowDelegate {
             
             let editor = self.mainViewController.mainTextView.textView
             
+            self.clearDiagnostics()
+            
             if diagnostics.isEmpty {
-                self.clearDiagnostics()
+                return
             }
             
             var maxLine = -1, column = -1
+            
+            editor.diagnostics = diagnostics
             
             for diagnostic in diagnostics {
                 
@@ -179,8 +187,6 @@ class CDMainWindowController: NSWindowController, NSWindowDelegate {
                 
             }
             
-            // print(maxLine, column)
-            // print((lineIndices[maxLine] ?? 10000000) + column)
             if (lineIndices[maxLine] ?? 10000000) + column > editor.text.count {
                 return
             }

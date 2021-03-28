@@ -84,15 +84,17 @@ class CDCodeEditorLineNumberView: CDFlippedView {
         
         for item in currentLineRects {
             
-            let button = CDCodeEditorLineNumberViewButton(frame: NSMakeRect(2.0, item.origin.y, 34.0, item.height))
+            let button = CDCodeEditorLineNumberViewButton(frame: NSMakeRect(2.0, item.origin.y, 43.0, item.height))
             button.isBordered = false
             button.font = NSFont(name: CDSettings.fontName, size: CGFloat(CDSettings.fontSize) * 0.92)
             button.target = self
             button.action = #selector(buttonClicked(_:))
             lineNumber += 1
+            button.alignment = .right
+            button.imagePosition = .imageLeft
+            button.imageHugsTitle = true
             button.title = "\(lineNumber)"
-            button.sizeToFit()
-            button.frame.origin.x = self.bounds.width - button.frame.size.width - 2.0
+            button.imageScaling = .scaleProportionallyUpOrDown
             self.addSubview(button)
             if self.debugLines.contains(lineNumber) {
                 button.markAsBreakpointLine()
@@ -133,10 +135,13 @@ class CDCodeEditorLineNumberView: CDFlippedView {
     }*/
     
     @objc func buttonClicked(_ sender: CDCodeEditorLineNumberViewButton) {
-        sender.markAsBreakpointLine()
-        if let line = Int(sender.title) {
-            self.delegate?.didClickButton?(atLine: line, button: sender)
+        // sender.markAsBreakpointLine()
+        if sender.correspondingDiagnostics.count > 0 {
+            CDDiagnosticsViewController().openInPopover(relativeTo: sender.bounds, of: sender, preferredEdge: .maxY, diagnostics: sender.correspondingDiagnostics)
         }
+        /* if let line = Int(sender.title) {
+            self.delegate?.didClickButton?(atLine: line, button: sender)
+        } */
     }
     
     required init?(coder: NSCoder) {

@@ -18,10 +18,19 @@ public extension NSAttributedString.Key {
     static let editorPlaceholder = NSAttributedString.Key("editorPlaceholder")
     
     static let foldedCode = NSAttributedString.Key("foldedCode")
+    
+    static let errorCode = NSAttributedString.Key("errorCode")
 
 }
 
-class SKSyntaxTextViewLayoutManager: NSLayoutManager {
+class SKSyntaxTextViewLayoutManager: NSLayoutManager, CDLineRangeCacheable {
+    
+    var string: NSString {
+        return self.attributedString().string as NSString
+    }
+    
+    var lineRangeCache = CDLineRangeCache()
+    
 	
 	override func drawGlyphs(forGlyphRange glyphsToShow: NSRange, at origin: CGPoint) {
 
@@ -80,5 +89,14 @@ class SKSyntaxTextViewLayoutManager: NSLayoutManager {
 		super.drawGlyphs(forGlyphRange: glyphsToShow, at: origin)
 
 	}
+    
+    override func processEditing(for textStorage: NSTextStorage, edited editMask: NSTextStorageEditActions, range newCharRange: NSRange, changeInLength delta: Int, invalidatedRange invalidatedCharRange: NSRange) {
+        
+        if editMask.contains(.editedCharacters) {
+            self.invalidateLineRanges(in: newCharRange, changeInLength: delta)
+        }
+        
+        super.processEditing(for: textStorage, edited: editMask, range: newCharRange, changeInLength: delta, invalidatedRange: invalidatedCharRange)
+    }
 	
 }
