@@ -119,6 +119,7 @@ class CDSnippetPopoverViewController: NSViewController, SKSyntaxTextViewDelegate
         self.snippetIndex = index
         self.editButton.imagePosition = .imageOnly
         self.editButton.isBordered = false
+        self.completionTextField.stringValue = completion
         
         self.textView.textView.isEditable = isEditable
         

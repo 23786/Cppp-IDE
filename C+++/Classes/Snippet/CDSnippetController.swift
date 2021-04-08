@@ -55,6 +55,7 @@ class CDSnippetController: NSObject {
     func add(snippet: CDSnippet) {
         self.snippets.append(snippet)
         select(index: self.snippets.count - 1)
+        NSKeyedArchiver.archiveRootObject(self.snippets, toFile: CDSnippetController.archivePath.path)
     }
     
     func remove(at index: Int) {
