@@ -131,12 +131,14 @@ class CDLanguageServerClient: NSObject {
     
     private func writeRequest(_ request: CDLSPRequest) {
         
-        let data = try? request.toData()
-        guard data != nil else {
-            return
-        }
-        if isProcessRunning {
-            self.inputPipe.fileHandleForWriting.write(data!)
+        DispatchQueue(label: "LanguageServer", qos: .utility).async {
+            let data = try? request.toData()
+            guard data != nil else {
+                return
+            }
+            if self.isProcessRunning {
+                self.inputPipe.fileHandleForWriting.write(data!)
+            }
         }
         
     }
@@ -144,12 +146,14 @@ class CDLanguageServerClient: NSObject {
     
     private func writeNotification(_ not: CDLSPNotification) {
         
-        let data = try? not.toData()
-        guard data != nil else {
-            return
-        }
-        if isProcessRunning {
-            self.inputPipe.fileHandleForWriting.write(data!)
+        DispatchQueue(label: "LanguageServer", qos: .utility).async {
+            let data = try? not.toData()
+            guard data != nil else {
+                return
+            }
+            if self.isProcessRunning {
+                self.inputPipe.fileHandleForWriting.write(data!)
+            }
         }
         
     }
