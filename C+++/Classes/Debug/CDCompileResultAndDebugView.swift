@@ -96,7 +96,7 @@ class CDCompileResultAndDebugView: NSView {
             (self.window?.windowController?.document as? CDCodeDocument)?.compileFile(nil)
         }
 
-        self.runProcess = processForShellCommand(command: "\"" + name + "\"" + " " + CDSettings.runArguments)
+        self.runProcess = ProcessForShellCommand(command: "\"" + name + "\"" + " " + CDSettings.runArguments)
         inputPipe = Pipe()
         errorPipe = Pipe()
         outputPipe = Pipe()

@@ -27,7 +27,7 @@ extension CDCodeDocument {
         let command = "cd \"\(path)\"\n" + "\(CDSettings.compiler) \(arguments) \(_fileURL) -o \(out)"
         
         // Compile
-        runShellCommand(command) { (compileResult) in
+        RunShellCommand(command) { (compileResult) in
             
             var result = ""
             

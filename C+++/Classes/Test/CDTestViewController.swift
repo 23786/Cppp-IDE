@@ -57,7 +57,7 @@ class CDTestViewController: NSViewController {
 
             if i.isEnabled {
                 
-                runShellCommand("\"\(executablePath)\"", i.input! + "\nEOF\n") { (ans) in
+                RunShellCommand("\"\(executablePath)\"", i.input! + "\nEOF\n") { (ans) in
                     
                     let first = ans.first
                     i.actualOutput = first

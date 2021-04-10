@@ -15,7 +15,7 @@ import Foundation
    If an error ocurred, return a string array with two items (stantard output and stantard error).
 */
 
-func runShellCommand(_ command: String, _ stdin: String = "", terminationHandler:  @escaping ([String]) -> Void) {
+func RunShellCommand(_ command: String, _ stdin: String = "", terminationHandler:  @escaping ([String]) -> Void) {
     
     DispatchQueue(label: "CpppCommandRun").async {
         
@@ -57,7 +57,7 @@ func runShellCommand(_ command: String, _ stdin: String = "", terminationHandler
 }
 
 
-func processForShellCommand(command: String) -> Process {
+func ProcessForShellCommand(command: String) -> Process {
     
     let task = Process()
     task.launchPath = "/bin/bash"
