@@ -1930,6 +1930,7 @@
                                                             <outlet property="logView" destination="XdU-QA-NPp" id="zbN-Tn-V4S"/>
                                                             <outlet property="resultAndRunSplitView" destination="JZw-ud-hkq" id="hlr-Xm-CEB"/>
                                                             <outlet property="runView" destination="7Fx-zI-8ri" id="b6h-PY-a8p"/>
+                                                            <outlet property="segmentedControl" destination="5YM-XS-gw7" id="112-9v-pj1"/>
                                                             <outlet property="titleLabel" destination="VdK-iY-uTL" id="tkG-me-nj2"/>
                                                             <outlet property="warningCountLabel" destination="gOT-10-Wqq" id="Z2v-cN-lEF"/>
                                                             <outlet property="warningImageView" destination="8IU-nZ-4dQ" id="P0c-rw-cXg"/>

@@ -166,6 +166,7 @@ class SKSyntaxTextView: View {
         lineNumberScrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         lineNumberScrollView.widthAnchor.constraint(equalToConstant: 55.0).isActive = true
         lineNumberScrollView.documentView = lineNumberView
+        
         lineNumberScrollView.drawsBackground = true
         lineNumberScrollView.backgroundColor = .textBackgroundColor
         let view = CDFlippedView(frame: NSMakeRect(0.0, 0.0, 55.0, 0.0))
@@ -203,6 +204,8 @@ class SKSyntaxTextView: View {
         textView.allowsUndo = true
         textView.usesFindBar = true
         textView.needsDisplay = true
+        textView.backgroundColor = .textBackgroundColor
+        textView.drawsBackground = true
         
         textView.textContainer?.containerSize = NSSize(width: self.bounds.width, height: .greatestFiniteMagnitude)
         textView.textContainer?.widthTracksTextView = true

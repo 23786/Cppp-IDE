@@ -57,13 +57,17 @@ class CDTestViewController: NSViewController {
 
             if i.isEnabled {
                 
-                let ans = runShellCommand("\"\(executablePath)\"", i.input! + "\nEOF\n").first
-                i.actualOutput = ans
-                
-                if ans?.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .newlines) == i.output?.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .newlines) {
-                    i.result = "Correct"
-                } else {
-                    i.result = "Incorrect"
+                runShellCommand("\"\(executablePath)\"", i.input! + "\nEOF\n") { (ans) in
+                    
+                    let first = ans.first
+                    i.actualOutput = first
+                    
+                    if first?.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .newlines) == i.output?.trimmingCharacters(in: .whitespaces).trimmingCharacters(in: .newlines) {
+                        i.result = "Correct"
+                    } else {
+                        i.result = "Incorrect"
+                    }
+                    
                 }
                 
             }

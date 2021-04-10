@@ -10,8 +10,8 @@ import Cocoa
 
 extension CDCodeDocument {
     
-    @discardableResult
-    class func compileFile(fileURL: URL, alsoRuns: Bool = true, arguments: String = CDSettings.compileArguments, postsNotification: Bool = true) -> (log: String, result: CDCompileResult?) {
+    
+    class func compileFile(fileURL: URL, alsoRuns: Bool = true, arguments: String = CDSettings.compileArguments, postsNotification: Bool = true, terminationHandler: @escaping ((log: String, result: CDCompileResult?)) -> Void) {
         
         let nsString = fileURL.path.nsString
         
@@ -27,44 +27,47 @@ extension CDCodeDocument {
         let command = "cd \"\(path)\"\n" + "\(CDSettings.compiler) \(arguments) \(_fileURL) -o \(out)"
         
         // Compile
-        let compileResult = runShellCommand(command)
-        
-        var result = ""
-        
-        if compileResult.count == 1 {
+        runShellCommand(command) { (compileResult) in
             
-            // Success
-            result = "Compile Command:\n\n\(command)\n\nCompile Succeed"
+            var result = ""
             
-        } else {
-            
-            result = "Compile Command:\n\n\(command)\n\nCompile Failed\n\n" + compileResult[1]
-            
-        }
-        
-        let res = parseCompileResult(result: result)
-        
-        /*if postsNotification {
-            if res.succeed {
-                NSObject().sendUserNotification(title: "Compile Succeed", subtitle: "\(fileURL.lastPathComponent)")
+            if compileResult.count == 1 {
+                
+                // Success
+                result = "Compile Command:\n\n\(command)\n\nCompile Succeed"
+                
             } else {
-                NSObject().sendUserNotification(title: "Compile Failed", subtitle: "\(fileURL.lastPathComponent)")
+                
+                result = "Compile Command:\n\n\(command)\n\nCompile Failed\n\n" + compileResult[1]
+                
             }
             
-        }*/
-        
-        if alsoRuns && res.succeed {
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.10) {
-                // let process = processForShellCommand(command: "cd \"\(path)\"\n" + "./\(out)")
-                // process.launch()
-                guard FileManager.default.fileExists(atPath: path) else {
-                    return
+            let res = parseCompileResult(result: result)
+            
+            /*if postsNotification {
+                if res.succeed {
+                    NSObject().sendUserNotification(title: "Compile Succeed", subtitle: "\(fileURL.lastPathComponent)")
+                } else {
+                    NSObject().sendUserNotification(title: "Compile Failed", subtitle: "\(fileURL.lastPathComponent)")
                 }
-                CDRunProcessViewController.run(command: "cd \"\(path)\"\n" + "./\(out)", name: fileURL.deletingPathExtension().lastPathComponent)
+                
+            }*/
+            
+            if alsoRuns && res.succeed {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.10) {
+                    // let process = processForShellCommand(command: "cd \"\(path)\"\n" + "./\(out)")
+                    // process.launch()
+                    guard FileManager.default.fileExists(atPath: path) else {
+                        return
+                    }
+                    CDRunProcessViewController.run(command: "cd \"\(path)\"\n" + "./\(out)", name: fileURL.deletingPathExtension().lastPathComponent)
+                }
             }
+            
+            terminationHandler((result, res))
+            
         }
         
-        return (log: result, result: res)
         
     }
     
@@ -86,46 +89,60 @@ extension CDCodeDocument {
         
     }
     
-    @discardableResult
-    private func compileFile(runs: Bool) -> Bool {
+    private func compileFile(runs: Bool, terminationHandler: ((Bool) -> Void)? = nil) {
         
         guard self.fileURL != nil else {
             self.contentViewController?.showAlert("Error", "Please save your file first before compiling.")
-            return false
+            terminationHandler?(false)
+            return
         }
         
-        let res = CDCodeDocument.compileFile(fileURL: self.fileURL!, alsoRuns: runs)
+        self.contentViewController?.consoleView.switchModeToCompileLog()
+        let time = DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short)
+        self.contentViewController?.consoleView.logView.string = "[\(time)] Compiling...\n"
         
-        let result = res.result
-        result?.calculateErrorAndWarningCount()
-        
-        if result != nil {
-            for error in result!.errors {
-                guard error.file == self.fileURL?.lastPathComponent else {
-                    continue
+        CDCodeDocument.compileFile(fileURL: self.fileURL!, alsoRuns: runs) { (res) in
+            
+            let time = DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short)
+            self.contentViewController?.consoleView.logView.string += "[\(time)] Compile Finished\n\n"
+            
+            // DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.6) {
+                self.contentViewController?.consoleView.switchModeToCompileResult()
+            // }
+            
+            let result = res.result
+            result?.calculateErrorAndWarningCount()
+            
+            if result != nil {
+                for error in result!.errors {
+                    guard error.file == self.fileURL?.lastPathComponent else {
+                        continue
+                    }
+                    switch error.type {
+                        case .error, .fatalError:
+                            self.contentViewController.mainTextView.lineNumberView?.buttonsArray[error.line - 1].markAsErrorLine()
+                        case .warning:
+                            self.contentViewController.mainTextView.lineNumberView?.buttonsArray[error.line - 1].markAsWarningLine()
+                        case .note, .unknown:
+                            self.contentViewController.mainTextView.lineNumberView?.buttonsArray[error.line - 1].markAsNoteLine()
+                    }
+                    
                 }
-                switch error.type {
-                    case .error, .fatalError:
-                        self.contentViewController.mainTextView.lineNumberView?.buttonsArray[error.line - 1].markAsErrorLine()
-                    case .warning:
-                        self.contentViewController.mainTextView.lineNumberView?.buttonsArray[error.line - 1].markAsWarningLine()
-                    case .note, .unknown:
-                        self.contentViewController.mainTextView.lineNumberView?.buttonsArray[error.line - 1].markAsNoteLine()
-                }
-                
             }
+            
+            self.contentViewController?.consoleView?.compileResult = res.result
+            self.contentViewController?.consoleView?.logView?.string += res.log
+            
+            if !(result?.succeed ?? true) {
+                let vc = CDCompileResultMessageBox()
+                vc.isSuccess = false
+                self.contentViewController?.presentAsSheet(vc)
+            }
+            
+            terminationHandler?(result?.succeed ?? false)
+            
         }
         
-        self.contentViewController?.consoleView?.compileResult = res.result
-        self.contentViewController?.consoleView?.logView?.string = res.log
-        
-        if !(result?.succeed ?? true) {
-            let vc = CDCompileResultMessageBox()
-            vc.isSuccess = false
-            self.contentViewController?.presentAsSheet(vc)
-        }
-        
-        return result?.succeed ?? false
         
     }
     
@@ -138,8 +155,10 @@ extension CDCodeDocument {
     
     @IBAction func compileAndRunTestPoint(_ sender: Any?) {
         
-        if compileFile(runs: false) {
-            self.contentViewController.consoleView.runTestPoint(sender)
+        compileFile(runs: false) { (bool) in
+            if bool {
+                self.contentViewController.consoleView.runTestPoint(sender)
+            }
         }
         
     }

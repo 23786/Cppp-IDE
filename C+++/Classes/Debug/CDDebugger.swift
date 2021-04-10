@@ -69,55 +69,57 @@ class CDDebugger: NSObject {
         self.end()
         
         let url = URL(string: self.filePath.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)!
-        let res = CDCodeDocument.compileFile(fileURL: url, alsoRuns: false, arguments: "-g")
-        if !(res.result?.succeed ?? false) {
-            self.delegate?.compileFailed()
-            return
-        }
-        
-        debugTask = Process()
-        debugTask?.launchPath = "/bin/bash"
-        debugTask?.arguments = ["-c", "lldb \"\(self.filePath.nsString.deletingPathExtension)\""]
-        
-        let pipe = Pipe()
-        self.pipe = Pipe()
-        debugTask?.standardOutput = pipe
-        debugTask?.standardError = pipe
-        debugTask?.standardInput = self.pipe
-        let outHandle = pipe.fileHandleForReading
-        
-        outHandle.readabilityHandler = { pipe in
+        CDCodeDocument.compileFile(fileURL: url, alsoRuns: false, arguments: "-g") { (res) in
             
-            if let data = String(data: pipe.availableData, encoding: .utf8) {
-                if data != "" {
-                    DispatchQueue.main.sync {
-                        self.received(input: data)
-                        self.delegate?.received(text: data, from: self)
+            if !(res.result?.succeed ?? false) {
+                self.delegate?.compileFailed()
+                return
+            }
+            
+            self.debugTask = Process()
+            self.debugTask?.launchPath = "/bin/bash"
+            self.debugTask?.arguments = ["-c", "lldb \"\(self.filePath.nsString.deletingPathExtension)\""]
+            
+            let pipe = Pipe()
+            self.pipe = Pipe()
+            self.debugTask?.standardOutput = pipe
+            self.debugTask?.standardError = pipe
+            self.debugTask?.standardInput = self.pipe
+            let outHandle = pipe.fileHandleForReading
+            
+            outHandle.readabilityHandler = { pipe in
+                
+                if let data = String(data: pipe.availableData, encoding: .utf8) {
+                    if data != "" {
+                        DispatchQueue.main.sync {
+                            self.received(input: data)
+                            self.delegate?.received(text: data, from: self)
+                        }
                     }
+                } else {
+                    Swift.print("Error decoding data: \(pipe.availableData)")
                 }
-            } else {
-                Swift.print("Error decoding data: \(pipe.availableData)")
+                
+            }
+            
+            self.debugTask?.launch()
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+                
+                for bp in self.breakpoints {
+                    self.sendCommand(command: "breakpoint set --line \(bp.line)")
+                }
+                
+                var index = 1
+                for v in self.watchVars {
+                    self.sendCommand(command: "display \(v.name)")
+                    self.watchVars[index - 1].index = index
+                    index += 1
+                }
+                
             }
             
         }
-        
-        debugTask?.launch()
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
-            
-            for bp in self.breakpoints {
-                self.sendCommand(command: "breakpoint set --line \(bp.line)")
-            }
-            
-            var index = 1
-            for v in self.watchVars {
-                self.sendCommand(command: "display \(v.name)")
-                self.watchVars[index - 1].index = index
-                index += 1
-            }
-            
-        }
-        
         
     }
     

@@ -18,6 +18,7 @@ class CDCompileResultAndDebugView: NSView {
     @IBOutlet weak var warningImageView: NSImageView!
     @IBOutlet weak var commandTextField: NSTextField!
     @IBOutlet weak var debugTextView: NSTextView!
+    @IBOutlet weak var segmentedControl: NSSegmentedControl!
     
     @IBOutlet weak var logView: NSTextView!
     @IBOutlet weak var compileResultTableView: NSTableView!
