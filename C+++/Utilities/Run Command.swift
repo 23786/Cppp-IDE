@@ -44,9 +44,10 @@ func RunShellCommand(_ command: String, _ stdin: String = "", terminationHandler
                     terminationHandler([output])
                     return
                 }
-            }
-            DispatchQueue.main.async {
-                terminationHandler([output, errorOutput])
+            } else {
+                DispatchQueue.main.async {
+                    terminationHandler([output, errorOutput])
+                }
             }
             
         }
