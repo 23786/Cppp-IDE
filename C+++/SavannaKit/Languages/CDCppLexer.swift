@@ -69,7 +69,7 @@ class CDCppLexer: SKRegexLexer {
         var generators = [TokenGenerator?]()
     
         generators.append(regexGenerator("\\b(0b[01']+)", tokenType: .number))
-        generators.append(regexGenerator("(-?)\\b([\\d']+(\\.[\\d']*)?|\\.[\\d']+)(u|U|l|L|ul|UL|f|F|b|B)", tokenType: .number))
+        generators.append(regexGenerator("(-?)\\b([\\d']+(\\.[\\d']*)?|\\.[\\d']+)(u|U|ll|l|LL|L|ul|UL|f|F|b|B)", tokenType: .number))
         generators.append(regexGenerator("(-?)(\\b0[xX][a-fA-F0-9']+|(\\b[\\d']+(\\.[\\d']*)?|\\.[\\d']+)([eE][-+]?[\\d']+)?)", tokenType: .number))
         
         generators.append(regexGenerator("(?<=\\.)[A-Za-z_]+\\w*", tokenType: .identifier))
@@ -82,7 +82,7 @@ class CDCppLexer: SKRegexLexer {
         
         generators.append(keywordGenerator(keywords, tokenType: .keyword))
         
-        let stdlibIdentifiers = "std string cin cout cerr clog stdin stdout stderr stringstream istringstream ostringstream auto_ptr deque list queue stack vector map set bitset multiset multimap unordered_set unordered_map unordered_multiset unordered_multimap array shared_ptr abort abs acos asin atan2 atan calloc ceil cosh cos exit exp fabs floor fmod fprintf fputs free frexp fscanf isalnum isalpha iscntrl isdigit isgraph islower isprint ispunct isspace isupper isxdigit tolower toupper labs ldexp log10 log malloc realloc memchr memcmp memcpy memset modf pow printf putchar puts scanf sinh sin snprintf sprintf sqrt sscanf strcat strchr strcmp strcpy strcspn strlen strncat strncmp strncpy strpbrk strrchr strspn strstr tanh tan vfprintf vprintf vsprintf endl initializer_list unique_ptr priority_queue freopen pair".components(separatedBy: " ")
+        let stdlibIdentifiers = "std string cin cout cerr clog stdin stdout stderr stringstream istringstream ostringstream auto_ptr deque list queue stack vector map set bitset multiset multimap unordered_set unordered_map unordered_multiset unordered_multimap array shared_ptr abort abs acos asin atan2 atan calloc ceil cosh cos exit exp fabs floor fmod fprintf fputs free frexp fscanf isalnum isalpha iscntrl isdigit isgraph islower isprint ispunct isspace isupper isxdigit tolower toupper labs ldexp log10 log malloc realloc memchr memcmp memcpy memset modf pow printf putchar puts scanf sinh sin snprintf sprintf sqrt sscanf strcat strchr strcmp strcpy strcspn strlen strncat strncmp strncpy strpbrk strrchr strspn strstr tanh tan vfprintf vprintf vsprintf endl initializer_list unique_ptr priority_queue freopen pair getchar".components(separatedBy: " ")
         
         generators.append(keywordGenerator(stdlibIdentifiers, tokenType: .identifier))
         

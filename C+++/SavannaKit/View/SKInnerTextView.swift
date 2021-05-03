@@ -32,7 +32,9 @@ class SKInnerTextView: TextView {
                 guard let line = diagnostic.range?.start.line else {
                     continue
                 }
-                self.lineNumberView?.buttonsArray[line].correspondingDiagnostics.append(diagnostic)
+                if line < self.lineNumberView?.buttonsArray.count ?? 0 {
+                    self.lineNumberView?.buttonsArray[line].correspondingDiagnostics.append(diagnostic)
+                }
             }
         }
     }
