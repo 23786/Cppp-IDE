@@ -10,8 +10,8 @@ import Foundation
 
 extension CDLanguageServerClient {
     
-    
-    func readResponse(_ data: Data) {
+    /// If the data is incomplete, the return value is false.
+    func readResponse(_ data: Data) -> Bool {
         
         do {
             let res = try CDLSPProcessDataFromServer(from: data)
@@ -20,12 +20,23 @@ extension CDLanguageServerClient {
                 if res.method == "textDocument/publishDiagnostics" {
                     processDiagnostics(response: res as! CDLSPNotification)
                 }
+            } else if res is CDLSPResponse {
+                // print(res)
             }
+            
+            return true
             // else ...
             
         } catch {
             print(error)
+            if error is CDLSPError {
+                if (error as! CDLSPError).description == CDLSPError.incompleteError.description {
+                    return false
+                }
+            }
         }
+        
+        return true
         
     }
     

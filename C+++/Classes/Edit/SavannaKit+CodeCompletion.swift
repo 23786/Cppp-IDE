@@ -36,7 +36,9 @@ extension SKInnerTextView: CDCodeCompletionViewControllerDelegate {
                 case "'": super.insertText("''", replacementRange: replacementRange)
                 default:
                     super.insertText(string, replacementRange: replacementRange)
-                    self.complete(nil)
+                    if CDSettings.codeCompletion {
+                        self.complete(nil)
+                    }
                     return
             }
             self.setSelectedRange(NSMakeRange(self.selectedRange.location - 1, 0))
@@ -109,12 +111,19 @@ extension SKInnerTextView: CDCodeCompletionViewControllerDelegate {
     
     func getCompletionResults(string: String, forTypedText typed: String, charRange: NSRange, cursorIndex: Int) {
         
-        DispatchQueue(label: "C+++.Code_Completion", qos: .userInteractive).async {
+       //  DispatchQueue(label: "C+++.Code_Completion", qos: .userInteractive).async {
             
             
             let line = string.lineNumber(at: cursorIndex)
             let column = string.columnNumber(at: cursorIndex)
             
+            
+            guard self.document?.fileURL != nil else {
+                return
+            }
+            GlobalLSPClient?.completion(path: (self.document?.fileURL!.path)!, line: line, character: column)
+            
+            /* // currently commented to test the new completion system
             var completionResults = CDSnippetController.shared.completionItems
             
             let results = CKTranslationUnit(text: string, language: CKLanguageCPP).completionResults(forLine: UInt(line), column: UInt(column))
@@ -148,8 +157,8 @@ extension SKInnerTextView: CDCodeCompletionViewControllerDelegate {
             self.cachedCompletionResults = completionResults
             
             NotificationCenter.default.post(name: NSNotification.Name("C+++_Received_Code_Completion_Data"), object: nil)
-            
-        }
+            */
+       // }
         
     }
     

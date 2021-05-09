@@ -23,6 +23,8 @@ class CDLanguageServerClient: NSObject {
     private let errorPipe = Pipe()
     private var id: Int = 1
     private var isProcessRunning = false
+    private var completeFlag = true
+    private var incompleteData = Data()
     private var documentVersions: [String : Int] = [ : ]
     var delegate: CDLanguageServerClientDelegate?
     
@@ -40,21 +42,27 @@ class CDLanguageServerClient: NSObject {
             
             self.outputPipe.fileHandleForReading.readabilityHandler = { (fileHandle) in
                 
-                // print(String(data: fileHandle.availableData, encoding: .utf8))
-                self.readResponse(fileHandle.availableData)
+                var dataToRead = fileHandle.availableData
+                
+                if !self.readResponse(dataToRead) {
+                    dataToRead = self.incompleteData + dataToRead
+                    if !self.readResponse(dataToRead) {
+                        self.incompleteData = dataToRead
+                    } else {
+                        self.incompleteData = Data()
+                    }
+                    
+                } else {
+                    self.incompleteData = Data()
+                }
                 
             }
-            
-            // self.errorPipe.fileHandleForReading.readabilityHandler = { (fileHandle) in
-                
-                // NSLog("stderr: \(String(data: fileHandle.availableData, encoding: .utf8) ?? "ERROR")")
-                
-            // }
             
             process.launch()
             NotificationCenter.default.post(Notification(name: .languageServerDidInit))
             isProcessRunning = true
             process.terminationHandler = { (process) in
+                print("LSP Exited")
                 self.isProcessRunning = false
                 NotificationCenter.default.post(Notification(name: .languageServerDidQuit))
             }
@@ -126,6 +134,26 @@ class CDLanguageServerClient: NSObject {
             ]
         )
         self.writeNotification(noti)
+        
+    }
+    
+    func completion(path: String, line: Int, character: Int) {
+        
+        self.id += 1
+        let request = CDLSPRequest(
+            method: "textDocument/completion",
+            id: self.id,
+            params: [
+                "textDocument" : [
+                    "uri": URL(fileURLWithPath: path).absoluteString
+                ],
+                "position" : [
+                    "line": line,
+                    "character": character
+                ]
+            ]
+        )
+        self.writeRequest(request)
         
     }
     
