@@ -90,6 +90,7 @@
 		1895B51C24A716E60019580D /* CDFlippedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1895B51B24A716E60019580D /* CDFlippedView.swift */; };
 		1899D9232525B8A200EE5780 /* SavannaKit+CodeCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1899D9222525B8A200EE5780 /* SavannaKit+CodeCompletion.swift */; };
 		1899D9252526B4EF00EE5780 /* CDMainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1899D9242526B4EF00EE5780 /* CDMainWindow.swift */; };
+		18A45EEC26482F0900C3DF83 /* Process response from server.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A45EEB26482F0900C3DF83 /* Process response from server.png */; };
 		18B1857024638B2A00B579AD /* CDSnippet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B1856F24638B2A00B579AD /* CDSnippet.swift */; };
 		18B185732463B32400B579AD /* CDSnippetPopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B185712463B32400B579AD /* CDSnippetPopoverViewController.swift */; };
 		18B185742463B32400B579AD /* CDSnippetPopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B185722463B32400B579AD /* CDSnippetPopoverViewController.xib */; };
@@ -279,6 +280,7 @@
 		1895B51B24A716E60019580D /* CDFlippedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDFlippedView.swift; sourceTree = "<group>"; };
 		1899D9222525B8A200EE5780 /* SavannaKit+CodeCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavannaKit+CodeCompletion.swift"; sourceTree = "<group>"; };
 		1899D9242526B4EF00EE5780 /* CDMainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDMainWindow.swift; sourceTree = "<group>"; };
+		18A45EEB26482F0900C3DF83 /* Process response from server.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Process response from server.png"; sourceTree = "<group>"; };
 		18B1856F24638B2A00B579AD /* CDSnippet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDSnippet.swift; sourceTree = "<group>"; };
 		18B185712463B32400B579AD /* CDSnippetPopoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDSnippetPopoverViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		18B185722463B32400B579AD /* CDSnippetPopoverViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CDSnippetPopoverViewController.xib; sourceTree = "<group>"; };
@@ -735,6 +737,7 @@
 			isa = PBXGroup;
 			children = (
 				18DA029D25A15F4D001B2017 /* CDLanguageServerClient.swift */,
+				18A45EEB26482F0900C3DF83 /* Process response from server.png */,
 				18CB5CFD25CF834300FC2E9D /* CDLanguageServerClientDelegate.swift */,
 				18CB5CF625CF742000FC2E9D /* CDLSPRequest.swift */,
 				18CB5D0725D2BDD200FC2E9D /* LSPUtilities.swift */,
@@ -879,6 +882,7 @@
 				1872603524AF4FE8004C69B2 /* CDDiagnosticsViewController.xib in Resources */,
 				18B185742463B32400B579AD /* CDSnippetPopoverViewController.xib in Resources */,
 				18C5C75B255D5EA200C78FC0 /* CDRunProcessViewController.xib in Resources */,
+				18A45EEC26482F0900C3DF83 /* Process response from server.png in Resources */,
 				18B1859924699A2800B579AD /* Main.storyboard in Resources */,
 				18E17EBC24A809D200392009 /* CDCodeCompletionViewController.xib in Resources */,
 				183908B32548533D00313605 /* CDCompileResultMessageBox.xib in Resources */,

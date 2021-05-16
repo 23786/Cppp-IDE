@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		Eaqi5Wqk/pxHkS9N8nt31PZRcM4=
+		46deHVRJ9GZIjhxeByErSPf3Zik=
 		</data>
 		<key>Resources/README.md</key>
 		<data>
@@ -19,7 +19,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			NH0GUWn1b40d4T2rmF0+hMq9/pH8m8z4D13yfX/9rpA=
+			FgKajhQ/7gzkoBMCqNG251sKkWwLp8hdtufPj6eggVY=
 			</data>
 		</dict>
 		<key>Headers/SwiftTermMac.h</key>
@@ -33,42 +33,42 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ILurbU4KWWhasMdF6Xxpk2yf9JncHezitCSY2hEgXWg=
+			738jF62bi5V78rzDng+gjZLpoOAqVg4e1m0NLhV9fBk=
 			</data>
 		</dict>
 		<key>Modules/SwiftTermMac.swiftmodule/Project/x86_64.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ILurbU4KWWhasMdF6Xxpk2yf9JncHezitCSY2hEgXWg=
+			738jF62bi5V78rzDng+gjZLpoOAqVg4e1m0NLhV9fBk=
 			</data>
 		</dict>
 		<key>Modules/SwiftTermMac.swiftmodule/x86_64-apple-macos.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			WGST+ym5pd3za94PFgcZ3EQfRP592Q9o9A+rdiii9lw=
+			UAm7WoP5gLhe9o6jA1oTIOJdhxpQA3OMwwairOksVXs=
 			</data>
 		</dict>
 		<key>Modules/SwiftTermMac.swiftmodule/x86_64-apple-macos.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			FIeot0/kA1v8RKDmzuAEu5iTWt7eh+VzVguiDZUFbn8=
+			AQbTI4fWF5T8NtYGXN+QaulOqZKa/kHQ+NeTezviTzE=
 			</data>
 		</dict>
 		<key>Modules/SwiftTermMac.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			WGST+ym5pd3za94PFgcZ3EQfRP592Q9o9A+rdiii9lw=
+			UAm7WoP5gLhe9o6jA1oTIOJdhxpQA3OMwwairOksVXs=
 			</data>
 		</dict>
 		<key>Modules/SwiftTermMac.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			FIeot0/kA1v8RKDmzuAEu5iTWt7eh+VzVguiDZUFbn8=
+			AQbTI4fWF5T8NtYGXN+QaulOqZKa/kHQ+NeTezviTzE=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -82,7 +82,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ixfbudMoX4oKktitZq3PTPvLaavFDrsECVk0FGjLmI8=
+			34nbQJfh39+Tq1FJt+nrI/e6ziofuxUpqwy0m+HWPzQ=
 			</data>
 		</dict>
 		<key>Resources/README.md</key>

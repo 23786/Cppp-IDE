@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol SKSyntaxTextViewDelegate: class {
+protocol SKSyntaxTextViewDelegate: AnyObject {
 	
 	func didChangeText(_ syntaxTextView: SKSyntaxTextView)
 

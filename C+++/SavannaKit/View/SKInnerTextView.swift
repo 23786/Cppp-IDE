@@ -8,7 +8,7 @@
 
 import Cocoa
 
-protocol SKInnerTextViewDelegate: class {
+protocol SKInnerTextViewDelegate: AnyObject {
 	func didUpdateCursorFloatingState()
     var currentTheme: CDCodeEditorTheme? { get }
     var isChangingDocument: Bool { get }
