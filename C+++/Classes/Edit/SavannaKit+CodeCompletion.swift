@@ -34,6 +34,11 @@ extension SKInnerTextView: CDCodeCompletionViewControllerDelegate {
                 case "{": super.insertText("{}", replacementRange: replacementRange)
                 case "\"": super.insertText("\"\"", replacementRange: replacementRange)
                 case "'": super.insertText("''", replacementRange: replacementRange)
+                case "$":
+                    super.insertText(string, replacementRange: replacementRange)
+                    self.cachedCompletionResults = CDSnippetController.shared.completionItems
+                    showCompletionViewController()
+                    return
                 default:
                     super.insertText(string, replacementRange: replacementRange)
                     if CDSettings.codeCompletion {
