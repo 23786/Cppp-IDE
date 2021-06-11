@@ -10,14 +10,20 @@ It is developed by a Grade-Seven student @23786.
 
 ---
 
+**正在重构。现在的这个 repo 中的代码基本烂尾。之后可能换个名字重新从 1.0 开始编版本号。**
+
 
 **Note: Version 3.0 is being developed, but because it is a large update, so developing takes a lot of time. But **_do not install version 2.1_**, it is really unstable.**
 
 So if you want to use C+++, the best choice is to **wait** until the version 3.0 is released.
 
 **文化课原因，开发进展极慢，周末也不一定有时间写代码，现在在主分支里的代码编译后有很多 bug 待修 / feature 待实现，非常不建议使用。**
+<!--
+**现在开发进度卡在 LSP 这里，还没有搞清楚如何高效应用在编辑器上。**-->
 
-**现在开发进度卡在 LSP 这里，还没有搞清楚如何高效应用在编辑器上。**
+----
+
+以下是原来写的介绍，看看就行，看着很好，实际体验差远了。
 
 ----
 
